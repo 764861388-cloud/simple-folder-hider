@@ -3,7 +3,7 @@
   "name": "Simple Folder Hider",
   "version": "1.0.0",
   "minAppVersion": "1.4.0",
-  "description": "借助侧边栏眼睛图标全局总开关以及右键菜单，实现文件浏览器内文件夹隐藏功能.",
+  "description": "Hide folders in the file explorer via a global sidebar toggle and right-click menu.",
   "author": "764861388-cloud",
   "authorUrl": "https://github.com/764861388-cloud",
   "isDesktopOnly": false
