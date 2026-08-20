@@ -1,0 +1,7 @@
+/* Simple Folder Hider
+ * 隐藏规则：插件会给"被隐藏的文件夹"元素加上 simple-folder-hider-hidden 类，
+ * 这里统一负责真正的隐藏（Obsidian 会自动加载本文件，插件内不动态注入样式）。
+ */
+.simple-folder-hider-hidden {
+	display: none !important;
+}

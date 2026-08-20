@@ -20,6 +20,7 @@ export default {
 			targets: [
 				{ src: "manifest.json", dest: "dist" },
 				{ src: "versions.json", dest: "dist" },
+				{ src: "styles.css", dest: "dist" },
 			],
 		}),
 	],

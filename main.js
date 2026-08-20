@@ -6,8 +6,10 @@ const DEFAULT_SETTINGS = {
     enabled: false,
     hiddenFolders: [],
 };
+// 用于标记"被隐藏"的 CSS 类名，实际隐藏规则定义在 styles.css 中（不动态注入样式）
+const HIDDEN_CLASS = 'simple-folder-hider-hidden';
 class SimpleFolderHider extends obsidian.Plugin {
-    settings;
+    settings = DEFAULT_SETTINGS;
     ribbonEl = null;
     async onload() {
         await this.loadSettings();
@@ -51,7 +53,7 @@ class SimpleFolderHider extends obsidian.Plugin {
         this.applyHiding();
     }
     onunload() {
-        this.removeStyle();
+        this.clearHiddenMarks();
     }
     // 隐藏某个文件夹
     async hideFolder(path) {
@@ -69,37 +71,36 @@ class SimpleFolderHider extends obsidian.Plugin {
         this.applyHiding();
         new obsidian.Notice('已取消隐藏：' + path);
     }
-    // 根据设置注入或移除隐藏样式
+    // 根据设置给需要隐藏的文件夹元素打上 HIDDEN_CLASS，由 styles.css 负责真正隐藏
     applyHiding() {
-        this.removeStyle();
+        this.clearHiddenMarks();
         if (!this.settings.enabled) {
-            return; // 总开关关闭：不注入样式，全部文件夹显示
+            return; // 总开关关闭：不隐藏任何文件夹
         }
-        const rules = [];
-        for (const path of this.settings.hiddenFolders) {
-            const safe = this.escapeCss(path);
-            rules.push(`.nav-folder:has(.nav-folder-title[data-path="${safe}"]) { display: none; }`);
-        }
-        if (rules.length === 0) {
+        if (this.settings.hiddenFolders.length === 0) {
             return;
         }
-        const style = document.createElement('style');
-        style.id = 'simple-folder-hider-style';
-        style.textContent = rules.join('\n');
-        document.head.appendChild(style);
+        const folderEls = document.querySelectorAll('.nav-folder');
+        folderEls.forEach((folder) => {
+            const title = folder.querySelector(':scope > .nav-folder-title');
+            if (!title) {
+                return;
+            }
+            const path = title.getAttribute('data-path');
+            if (path && this.settings.hiddenFolders.includes(path)) {
+                folder.classList.add(HIDDEN_CLASS);
+            }
+        });
     }
-    removeStyle() {
-        const el = document.getElementById('simple-folder-hider-style');
-        if (el) {
-            el.remove();
-        }
-    }
-    // 转义 CSS 属性选择器里的特殊字符（双引号与反斜杠）
-    escapeCss(value) {
-        return value.replace(/["\\]/g, '\\$&');
+    // 移除所有已标记的隐藏类，恢复显示
+    clearHiddenMarks() {
+        document
+            .querySelectorAll('.' + HIDDEN_CLASS)
+            .forEach((el) => el.classList.remove(HIDDEN_CLASS));
     }
     async loadSettings() {
-        this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+        const data = (await this.loadData());
+        this.settings = Object.assign({}, DEFAULT_SETTINGS, data ?? {});
     }
     async saveSettings() {
         await this.saveData(this.settings);
