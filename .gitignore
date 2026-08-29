@@ -1,5 +1,6 @@
 node_modules/
 data.json
 dist/
+dist_old*/
 *.log
 .DS_Store

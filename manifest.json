@@ -3,8 +3,8 @@
   "name": "Simple Folder Hider",
   "version": "1.0.0",
   "minAppVersion": "1.4.0",
-  "description": "Hide folders in the file explorer via a global sidebar toggle and right-click menu.",
-  "author": "764861388-cloud",
+  "description": "Hide folders in the file explorer via a toolbar toggle and right-click menu.",
+  "author": "ya",
   "authorUrl": "https://github.com/764861388-cloud",
   "isDesktopOnly": false
 }

@@ -13,33 +13,16 @@ const DEFAULT_SETTINGS: SimpleFolderHiderSettings = {
 
 // 用于标记"被隐藏"的 CSS 类名，实际隐藏规则定义在 styles.css 中（不动态注入样式）
 const HIDDEN_CLASS = 'simple-folder-hider-hidden';
+const TOGGLE_BTN_CLASS = 'sfh-toggle-btn';
 
 export default class SimpleFolderHider extends Plugin {
 	settings: SimpleFolderHiderSettings = DEFAULT_SETTINGS;
-	private ribbonEl: HTMLElement | null = null;
 
 	async onload() {
 		await this.loadSettings();
 
-		// 1) 侧边栏眼睛图标：全局总开关
-		const initialIcon = this.settings.enabled ? 'eye' : 'eye-off';
-		this.ribbonEl = this.addRibbonIcon(
-			initialIcon,
-			'简易文件夹隐藏：点击切换隐藏总开关',
-			async () => {
-				this.settings.enabled = !this.settings.enabled;
-				await this.saveSettings();
-				this.applyHiding();
-				if (this.ribbonEl) {
-					setIcon(this.ribbonEl, this.settings.enabled ? 'eye' : 'eye-off');
-				}
-				if (this.settings.enabled) {
-					new Notice('简易文件夹隐藏：总开关已开启（隐藏生效）');
-				} else {
-					new Notice('简易文件夹隐藏：总开关已关闭（全部显示）');
-				}
-			}
-		);
+		// 1) 文件浏览器工具栏眼睛开关
+		this.addToolbarButton();
 
 		// 2) 文件树文件夹右键菜单
 		this.registerEvent(
@@ -70,12 +53,56 @@ export default class SimpleFolderHider extends Plugin {
 			this.app.workspace.on('layout-change', () => this.applyHiding())
 		);
 
-		// 启动时应用一次
-		this.applyHiding();
+		// 4) 启动时应用隐藏：等文件树渲染完成后再应用，否则 DOM 里还没有 .nav-folder
+		this.app.workspace.onLayoutReady(() => this.applyHiding());
+		window.setTimeout(() => this.applyHiding(), 600);
+		window.setTimeout(() => this.applyHiding(), 1500);
 	}
 
 	onunload() {
 		this.clearHiddenMarks();
+	}
+
+	/** 在文件浏览器工具栏注入眼睛总开关 */
+	private addToolbarButton() {
+		const tryAdd = () => {
+			const leaves = document.querySelectorAll(
+				".workspace-leaf-content[data-type='file-explorer']"
+			);
+			leaves.forEach((leaf) => {
+				const header = leaf.querySelector('.nav-header') as HTMLElement | null;
+				if (!header) return;
+				if (header.querySelector('.' + TOGGLE_BTN_CLASS)) return;
+
+				const btn = document.createElement('div');
+				btn.className =
+					'clickable-icon nav-action-button ' + TOGGLE_BTN_CLASS;
+				btn.setAttribute('aria-label', '简易文件夹隐藏：点击切换隐藏总开关');
+				setIcon(btn, this.settings.enabled ? 'eye' : 'eye-off');
+
+				btn.addEventListener('click', async () => {
+					this.settings.enabled = !this.settings.enabled;
+					await this.saveSettings();
+					this.applyHiding();
+					setIcon(btn, this.settings.enabled ? 'eye' : 'eye-off');
+					new Notice(
+						this.settings.enabled
+							? '简易文件夹隐藏：总开关已开启（隐藏生效）'
+							: '简易文件夹隐藏：总开关已关闭（全部显示）'
+					);
+				});
+
+				const container = header.querySelector(
+					'.nav-buttons-container'
+				) as HTMLElement | null;
+				if (container) container.appendChild(btn);
+				else header.appendChild(btn);
+			});
+		};
+
+		tryAdd();
+		const obs = new MutationObserver(tryAdd);
+		obs.observe(document.body, { childList: true, subtree: true });
 	}
 
 	// 隐藏某个文件夹
