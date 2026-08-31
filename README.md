@@ -14,11 +14,12 @@ A lightweight Obsidian plugin to hide folders **and notes** in the file explorer
 
 ## Installation
 
-### Option 1: Community plugins (after approval)
+### Option 1: BRAT (recommended)
 
-1. Open Obsidian Settings → Third-party plugins.
-2. Turn off Safe mode.
-3. Browse community plugins, search for "Simple Folder Hider" and enable it.
+1. Install the **BRAT** plugin from Obsidian community plugins.
+2. Open BRAT settings → **Add a beta plugin**.
+3. Paste `https://github.com/ya886ya/simple-folder-hider` and confirm.
+4. Enable "Simple Folder Hider" in Settings → Third-party plugins.
 
 ### Option 2: Manual install
 
@@ -76,15 +77,16 @@ simple-folder-hider/
 - **隐藏文件夹**：在文件树中右键任意文件夹，出现【隐藏文件夹】/【取消隐藏文件夹】。
 - **隐藏笔记（1.1.0 新增）**：在文件树中右键任意笔记 / 文件，出现【隐藏笔记】/【取消隐藏笔记】。
 - **数据持久化**：被隐藏的文件夹路径、笔记路径与总开关状态保存在插件自带的 `data.json` 中。
-- **纯 CSS 隐藏**：被隐藏的项目打上 CSS 类标记，隐藏规则放在 `styles.css` 中（不动态注入样式，符合社区审核要求）。
+- **纯 CSS 隐藏**：被隐藏的项目打上 CSS 类标记，隐藏规则放在 `styles.css` 中（不动态注入样式）。
 
 ## 安装
 
-### 方式一：社区插件市场（审核通过后）
+### 方式一：BRAT（推荐）
 
-1. 打开 Obsidian 设置 → 第三方插件；
-2. 关闭「安全模式」；
-3. 浏览社区插件，搜索「Simple Folder Hider」并安装启用。
+1. 在 Obsidian 社区插件中安装「BRAT」；
+2. 打开 BRAT 设置 → 「Add a beta plugin」；
+3. 粘贴仓库地址 `https://github.com/ya886ya/simple-folder-hider` 并确认；
+4. 在 设置 → 第三方插件 中启用「Simple Folder Hider」。
 
 ### 方式二：手动安装
 
