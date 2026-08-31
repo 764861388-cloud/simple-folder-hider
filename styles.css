@@ -1,9 +1,10 @@
 /* Simple Folder Hider
- * 隐藏规则：插件会给"被隐藏的文件夹"元素加上 simple-folder-hider-hidden 类，
+ * 隐藏规则：插件会给"被隐藏的文件夹/笔记"元素加上 simple-folder-hider-hidden 类，
  * 这里统一负责真正的隐藏（Obsidian 会自动加载本文件，插件内不动态注入样式）。
  * 注意：不使用 !important（社区 CSS LINT 会警告），
- * 而是用更高权重的选择器覆盖 Obsidian 默认的 .nav-folder 样式。
+ * 而是用更高权重的选择器覆盖 Obsidian 默认的 .nav-folder / .nav-file 样式。
  */
-.nav-files-container .nav-folder.simple-folder-hider-hidden {
+.nav-files-container .nav-folder.simple-folder-hider-hidden,
+.nav-files-container .nav-file.simple-folder-hider-hidden {
 	display: none;
 }

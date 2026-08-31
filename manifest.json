@@ -1,9 +1,9 @@
 {
   "id": "simple-folder-hider",
   "name": "Simple Folder Hider",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "minAppVersion": "1.4.0",
-  "description": "Hide folders in the file explorer via a toolbar toggle and right-click menu.",
+  "description": "Hide folders and notes in the file explorer via a toolbar toggle and right-click menu.",
   "author": "ya",
   "authorUrl": "https://github.com/ya886ya",
   "isDesktopOnly": false
