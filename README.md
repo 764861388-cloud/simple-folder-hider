@@ -1,3 +1,54 @@
+# 简易隐藏（Simple Folder Hider）
+
+一个轻量的 Obsidian 插件，用于在文件浏览器（侧边栏文件树）中隐藏**文件夹和笔记**，支持工具栏一键开关与右键菜单。
+
+## 功能特性
+
+- **全局总开关**：侧边栏眼睛图标按钮，一键开启 / 关闭整个隐藏功能。
+  - 总开关**关闭**时：所有文件夹与笔记正常显示。
+  - 总开关**开启**时：隐藏列表内的文件夹与笔记被隐藏。
+- **隐藏文件夹**：在文件树中右键任意文件夹，出现【隐藏文件夹】/【取消隐藏文件夹】。
+- **隐藏笔记（1.1.0 新增）**：在文件树中右键任意笔记 / 文件，出现【隐藏笔记】/【取消隐藏笔记】。
+- **数据持久化**：被隐藏的文件夹路径、笔记路径与总开关状态保存在插件自带的 `data.json` 中。
+- **纯 CSS 隐藏**：被隐藏的项目打上 CSS 类标记，隐藏规则放在 `styles.css` 中（不动态注入样式）。
+
+## 安装
+
+### 方式一：BRAT（推荐）
+
+1. 在 Obsidian 社区插件中安装「BRAT」；
+2. 打开 BRAT 设置 → 「Add a beta plugin」；
+3. 粘贴仓库地址 `https://github.com/ya886ya/simple-folder-hider` 并确认；
+4. 在 设置 → 第三方插件 中启用「Simple Folder Hider」。
+
+### 方式二：手动安装
+
+1. 从 Releases 下载 `main.js`、`manifest.json`、`styles.css`、`versions.json`；
+2. 放入 `<你的仓库>/.obsidian/plugins/simple-folder-hider/` 目录；
+3. 设置 → 第三方插件 → 启用。
+
+## 使用方法
+
+1. 点击左侧栏的**眼睛图标**切换隐藏总开关；
+2. 在文件树中对目标文件夹**右键**，选择【隐藏文件夹】或【取消隐藏文件夹】；
+3. 在文件树中对目标笔记 / 文件**右键**，选择【隐藏笔记】或【取消隐藏笔记】（1.1.0 新增）；
+4. 关闭总开关即可让所有项目恢复显示。
+
+## 构建与开发
+
+```bash
+npm install      # 安装依赖
+npm run build    # 编译到 dist/，产物为 main.js / manifest.json / versions.json / styles.css
+```
+
+发布时请将 `dist/` 内产物复制到插件根目录（Obsidian 只读取插件根目录），并提交到公开仓库。
+
+## 许可证
+
+[MIT](./LICENSE)
+
+---
+
 # Simple Folder Hider
 
 A lightweight Obsidian plugin to hide folders **and notes** in the file explorer, with a one-click toolbar toggle and a right-click menu.
@@ -60,56 +111,5 @@ simple-folder-hider/
 ```
 
 ## License
-
-[MIT](./LICENSE)
-
----
-
-# 简易隐藏（Simple Folder Hider）
-
-一个轻量的 Obsidian 插件，用于在文件浏览器（侧边栏文件树）中隐藏**文件夹和笔记**，支持工具栏一键开关与右键菜单。
-
-## 功能特性
-
-- **全局总开关**：侧边栏眼睛图标按钮，一键开启 / 关闭整个隐藏功能。
-  - 总开关**关闭**时：所有文件夹与笔记正常显示。
-  - 总开关**开启**时：隐藏列表内的文件夹与笔记被隐藏。
-- **隐藏文件夹**：在文件树中右键任意文件夹，出现【隐藏文件夹】/【取消隐藏文件夹】。
-- **隐藏笔记（1.1.0 新增）**：在文件树中右键任意笔记 / 文件，出现【隐藏笔记】/【取消隐藏笔记】。
-- **数据持久化**：被隐藏的文件夹路径、笔记路径与总开关状态保存在插件自带的 `data.json` 中。
-- **纯 CSS 隐藏**：被隐藏的项目打上 CSS 类标记，隐藏规则放在 `styles.css` 中（不动态注入样式）。
-
-## 安装
-
-### 方式一：BRAT（推荐）
-
-1. 在 Obsidian 社区插件中安装「BRAT」；
-2. 打开 BRAT 设置 → 「Add a beta plugin」；
-3. 粘贴仓库地址 `https://github.com/ya886ya/simple-folder-hider` 并确认；
-4. 在 设置 → 第三方插件 中启用「Simple Folder Hider」。
-
-### 方式二：手动安装
-
-1. 从 Releases 下载 `main.js`、`manifest.json`、`styles.css`、`versions.json`；
-2. 放入 `<你的仓库>/.obsidian/plugins/simple-folder-hider/` 目录；
-3. 设置 → 第三方插件 → 启用。
-
-## 使用方法
-
-1. 点击左侧栏的**眼睛图标**切换隐藏总开关；
-2. 在文件树中对目标文件夹**右键**，选择【隐藏文件夹】或【取消隐藏文件夹】；
-3. 在文件树中对目标笔记 / 文件**右键**，选择【隐藏笔记】或【取消隐藏笔记】（1.1.0 新增）；
-4. 关闭总开关即可让所有项目恢复显示。
-
-## 构建与开发
-
-```bash
-npm install      # 安装依赖
-npm run build    # 编译到 dist/，产物为 main.js / manifest.json / versions.json / styles.css
-```
-
-发布时请将 `dist/` 内产物复制到插件根目录（Obsidian 只读取插件根目录），并提交到公开仓库。
-
-## 许可证
 
 [MIT](./LICENSE)
