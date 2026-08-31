@@ -1,15 +1,16 @@
 # Simple Folder Hider
 
-A lightweight Obsidian plugin that hides specified folders in the file explorer.
+A lightweight Obsidian plugin to hide folders **and notes** in the file explorer, with a one-click toolbar toggle and a right-click menu.
 
 ## Features
 
 - **Global toggle**: a ribbon (sidebar) eye icon to enable / disable hiding with one click.
-  - Toggle **off**: all folders are shown.
-  - Toggle **on**: folders in the hidden list are hidden.
-- **Context menu**: right-click any folder in the file tree to choose **Hide folder** / **Unhide folder**.
-- **Persistent settings**: the hidden folder list and the toggle state are stored in the plugin's `data.json`.
-- **Pure CSS hiding**: hidden folders are marked with a CSS class; the actual hiding rule lives in `styles.css` (no runtime style injection).
+  - Toggle **off**: everything is shown.
+  - Toggle **on**: items in the hidden list are hidden.
+- **Hide folders**: right-click any folder in the file tree → **Hide folder** / **Unhide folder**.
+- **Hide notes (NEW in 1.1.0)**: right-click any note / file in the file tree → **Hide note** / **Unhide note**.
+- **Persistent settings**: the hidden folder list, hidden note list and the toggle state are stored in the plugin's `data.json`.
+- **Pure CSS hiding**: hidden items are marked with a CSS class; the actual hiding rule lives in `styles.css` (no runtime style injection).
 
 ## Installation
 
@@ -28,8 +29,9 @@ A lightweight Obsidian plugin that hides specified folders in the file explorer.
 ## Usage
 
 1. Click the **eye icon** in the left ribbon to toggle hiding.
-2. **Right-click** a folder in the file tree and choose **Hide folder** or **Unhide folder**.
-3. Turn the toggle off to show everything again.
+2. **Right-click** a folder → **Hide folder** / **Unhide folder**.
+3. **Right-click** a note / file → **Hide note** / **Unhide note** (new in 1.1.0).
+4. Turn the toggle off to show everything again.
 
 ## Development
 
@@ -62,18 +64,19 @@ simple-folder-hider/
 
 ---
 
-# 简易文件夹隐藏工具（Simple Folder Hider）
+# 简易隐藏（Simple Folder Hider）
 
-一个轻量的 Obsidian 插件，用于隐藏文件浏览器（侧边栏文件树）中指定的文件夹。
+一个轻量的 Obsidian 插件，用于在文件浏览器（侧边栏文件树）中隐藏**文件夹和笔记**，支持工具栏一键开关与右键菜单。
 
 ## 功能特性
 
 - **全局总开关**：侧边栏眼睛图标按钮，一键开启 / 关闭整个隐藏功能。
-  - 总开关**关闭**时：所有文件夹正常显示。
-  - 总开关**开启**时：隐藏列表内的文件夹被隐藏。
-- **右键菜单**：在文件树中右键任意文件夹，出现【隐藏文件夹】/【取消隐藏文件夹】。
-- **数据持久化**：被隐藏的文件夹路径列表与总开关状态保存在插件自带的 `data.json` 中。
-- **纯 CSS 隐藏**：被隐藏的文件夹打上 CSS 类标记，隐藏规则放在 `styles.css` 中（不动态注入样式，符合社区审核要求）。
+  - 总开关**关闭**时：所有文件夹与笔记正常显示。
+  - 总开关**开启**时：隐藏列表内的文件夹与笔记被隐藏。
+- **隐藏文件夹**：在文件树中右键任意文件夹，出现【隐藏文件夹】/【取消隐藏文件夹】。
+- **隐藏笔记（1.1.0 新增）**：在文件树中右键任意笔记 / 文件，出现【隐藏笔记】/【取消隐藏笔记】。
+- **数据持久化**：被隐藏的文件夹路径、笔记路径与总开关状态保存在插件自带的 `data.json` 中。
+- **纯 CSS 隐藏**：被隐藏的项目打上 CSS 类标记，隐藏规则放在 `styles.css` 中（不动态注入样式，符合社区审核要求）。
 
 ## 安装
 
@@ -93,7 +96,8 @@ simple-folder-hider/
 
 1. 点击左侧栏的**眼睛图标**切换隐藏总开关；
 2. 在文件树中对目标文件夹**右键**，选择【隐藏文件夹】或【取消隐藏文件夹】；
-3. 关闭总开关即可让所有文件夹恢复显示。
+3. 在文件树中对目标笔记 / 文件**右键**，选择【隐藏笔记】或【取消隐藏笔记】（1.1.0 新增）；
+4. 关闭总开关即可让所有项目恢复显示。
 
 ## 构建与开发
 
